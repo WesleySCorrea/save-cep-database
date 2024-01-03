@@ -26,9 +26,9 @@ public class ViaCep {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(response.body(), EnderecoDTO.class);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+                return mapper.readValue(response.body(), EnderecoDTO.class);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
     }
 }

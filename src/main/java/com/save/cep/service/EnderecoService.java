@@ -1,5 +1,7 @@
 package com.save.cep.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.save.cep.DTO.EnderecoDTO;
 import com.save.cep.client.ViaCep;
 import com.save.cep.model.Endereco;
@@ -15,23 +17,40 @@ import org.springframework.stereotype.Service;
 public class EnderecoService {
 
     private final ModelMapper mapper;
+    private final ObjectMapper objectMapper;
     private final ViaCep viaCep;
     private final EnderecoRepository enderecoRepository;
+    private final RedisService redisService;
 
     public EnderecoDTO insert(String cep){
 
-        var enderecoViaCep = viaCep.enderecoViaCep(cep);
+        var redisEndereco = redisService.getAdress(cep);
+        if (redisEndereco == null) {
 
-        mapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+            EnderecoDTO enderecoViaCep = viaCep.enderecoViaCep(cep);
 
-        EnderecoDTO enderecoDtoViaCep = new EnderecoDTO();
+            String jsonEndereco = null;
+            try {
+                jsonEndereco = objectMapper.writeValueAsString(enderecoViaCep);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            redisService.saveAdress(cep, jsonEndereco);
 
-        mapper.map(enderecoViaCep, enderecoDtoViaCep);
+            var endereco = mapper.map(enderecoViaCep, Endereco.class);
 
-        var request = mapper.map(enderecoDtoViaCep, Endereco.class);
+            var response = enderecoRepository.save(endereco);
 
-        var response = enderecoRepository.save(request);
+            return mapper.map(response, EnderecoDTO.class);
+        }
 
-        return mapper.map(response, EnderecoDTO.class);
+        EnderecoDTO endereco = null;
+        try {
+            endereco = objectMapper.readValue(redisEndereco, EnderecoDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return endereco;
     }
 }
