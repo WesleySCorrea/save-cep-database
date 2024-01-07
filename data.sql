@@ -1,4 +1,4 @@
-CREATE TABLE endereco (
+CREATE TABLE address (
     cep VARCHAR(10),
     logradouro VARCHAR(255),
     complemento VARCHAR(255),
