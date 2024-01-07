@@ -3,7 +3,7 @@ package com.save.cep.DTO;
 import lombok.Data;
 
 @Data
-public class EnderecoDTO {
+public class AddressDTO {
     private String cep;
     private String logradouro;
     private String complemento;

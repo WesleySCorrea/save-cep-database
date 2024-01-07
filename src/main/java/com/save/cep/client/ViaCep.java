@@ -1,8 +1,7 @@
 package com.save.cep.client;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.save.cep.DTO.EnderecoDTO;
+import com.save.cep.DTO.AddressDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ import java.net.http.HttpResponse;
 @RequiredArgsConstructor
 public class ViaCep {
 
-    public EnderecoDTO enderecoViaCep(String cep) {
+    public AddressDTO addressViaCep(String cep) {
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
 
@@ -26,7 +25,7 @@ public class ViaCep {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper mapper = new ObjectMapper();
-                return mapper.readValue(response.body(), EnderecoDTO.class);
+                return mapper.readValue(response.body(), AddressDTO.class);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

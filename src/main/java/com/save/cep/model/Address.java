@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "endereco")
+@Table(name = "address")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Endereco {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

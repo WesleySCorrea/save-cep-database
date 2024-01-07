@@ -1,6 +1,5 @@
 package com.save.cep.service;
 
-import com.save.cep.DTO.EnderecoDTO;
 import com.save.cep.repository.RedisRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,11 +9,11 @@ import org.springframework.stereotype.Service;
 public class RedisService {
     private final RedisRepository redisRepository;
 
-    public String saveAdress(String cep, String endereco) {
+    public String saveAdress(String cep, String address) {
 
-        redisRepository.save("cep: " + cep, endereco);
+        redisRepository.save("cep: " + cep, address);
 
-        return endereco;
+        return address;
     }
 
     public String getAdress(String cep) {
