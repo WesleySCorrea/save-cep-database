@@ -1,9 +1,13 @@
 package com.save.cep.DTO;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
-public class AddressDTO {
+@NoArgsConstructor
+public class AddressDTO implements Serializable {
     private String cep;
     private String logradouro;
     private String complemento;

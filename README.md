@@ -21,6 +21,6 @@ The following guides illustrate how to use some features concretely:
 
 ### Database
 
-* docker run -d --name save-cep -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=save-cep -p 5432:5432 postgres:latest
+* docker run -d --name save-cep-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=save-cep -p 5432:5432 postgres:latest
 
 * docker run --name save-cep-redis -p 6379:6379 -d redis

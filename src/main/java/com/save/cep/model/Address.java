@@ -9,9 +9,8 @@ import lombok.Data;
 @Table(name = "address")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Address {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(name = "cep")
     private String cep;
 

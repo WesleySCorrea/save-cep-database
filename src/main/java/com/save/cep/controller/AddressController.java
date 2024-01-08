@@ -13,7 +13,7 @@ public class AddressController {
 
     private final AddressService addressService;
     @PostMapping
-    public ResponseEntity<AddressDTO> insert(@RequestBody String cep){
+    public ResponseEntity<AddressDTO> insert(@RequestHeader(value = "cep") String cep){
 
         var address = addressService.insert(cep);
 

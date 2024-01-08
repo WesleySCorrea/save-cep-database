@@ -1,5 +1,7 @@
 package com.save.cep.service;
 
+import com.save.cep.DTO.AddressDTO;
+import com.save.cep.model.Address;
 import com.save.cep.repository.RedisRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,17 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class RedisService {
+
     private final RedisRepository redisRepository;
 
-    public String saveAdress(String cep, String address) {
+    public AddressDTO saveAdress(String cep, AddressDTO address) {
 
-        redisRepository.save("cep: " + cep, address);
+        redisRepository.save(cep, address);
 
         return address;
     }
 
-    public String getAdress(String cep) {
-        // Lógica de negócios antes de recuperar do Redis, se necessário
-        return redisRepository.getByKey("cep: " + cep);
+    public AddressDTO getAdress(String cep) {
+        return redisRepository.getByKey(cep);
     }
 }
