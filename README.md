@@ -20,7 +20,12 @@ The following guides illustrate how to use some features concretely:
 * [Building a Reactive RESTful Web Service](https://spring.io/guides/gs/reactive-rest-service/)
 
 ### Database
+* docker network create save-cep-network
 
-* docker run -d --name save-cep-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=save-cep -p 5432:5432 postgres:latest
+* docker run -d --name save-cep-postgres --network save-cep-network -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=save-cep -p 5432:5432 postgres:latest
 
-* docker run --name save-cep-redis -p 6379:6379 -d redis
+* docker run --name save-cep-redis --network save-cep-network -p 6379:6379 -d redis
+
+* docker build -t save-cep-app-container  .
+
+* docker run --name save-cep-app-container --network save-cep-network -p 8080:8080 save-cep-app-container

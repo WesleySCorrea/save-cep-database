@@ -11,7 +11,7 @@
 	<groupId>com.save</groupId>
 	<artifactId>cep</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Save Cep</name>
+	<name>save-cep</name>
 	<description>Save </description>
 	<properties>
 		<java.version>17</java.version>

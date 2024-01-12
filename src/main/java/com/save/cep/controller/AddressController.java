@@ -14,9 +14,7 @@ public class AddressController {
     private final AddressService addressService;
     @PostMapping
     public ResponseEntity<AddressDTO> insert(@RequestHeader(value = "cep") String cep){
-
         var address = addressService.insert(cep);
-
         return ResponseEntity.ok().body(address);
     }
 }
