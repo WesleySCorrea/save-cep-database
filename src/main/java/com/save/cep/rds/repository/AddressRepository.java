@@ -1,4 +1,4 @@
-package com.save.cep.repository;
+package com.save.cep.rds.repository;
 
 import com.save.cep.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
